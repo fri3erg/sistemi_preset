@@ -1,0 +1,115 @@
+GETOPT
+
+while((option = getopt(argc, argv, "camht:")) != -1){
+			switch(option) {
+
+
+DYNAMIC LIBRARYS
+
+handle = dlopen(realPath, RTLD_LAZY);
+    if (!handle) {
+      fprintf(stderr, "%s\n", dlerror());
+}
+
+dlerror();
+void (*mainso)(int, char**);
+    *(void **)(&mainso) = dlsym(handle, "main");
+    error = dlerror();
+    if (error != NULL) {
+      fprintf(stderr, "%s\n", error);
+}
+
+(*mainso)((int)argc - 1, arguments);
+    dlclose(handle);
+    exit(EXIT_SUCCESS);
+
+
+INODE
+
+typedef struct inodeList {
+	ino_t inode;
+	int rep;
+	struct inodeList* next;
+}inodeList;
+
+typedef inodeList* inodeList_ptr;
+inodeList* head=NULL;
+
+inodeList_ptr newNode = (inodeList_ptr)malloc(sizeof(inodeList));
+
+entry->d_ino con le dirent
+
+file.st_ino con le stat
+
+
+PARENT CONTROL
+
+prctl(PR_SET_NAME, name);
+  prctl(PR_SET_CHILD_SUBREAPER, grandadPid);
+prctl(PR_SET_NAME, name);
+
+
+BASENAME
+
+basename(filePathCpy))
+
+
+SEEK
+
+fseek(file1, startPoint, SEEK_SET); 
+fseek(f1, 0L, SEEK_END);
+	size_t sizeFile1= ftell(f1);
+
+
+EXECUTE
+
+int status= execvp(command, args);
+            if (status == -1) printf("errore");
+          }
+
+char* argument_list[] = {"ls", "-l", NULL};
+execvp("ls", argument_list);
+
+
+PIPES
+
+FILE *mypipe;
+	size_t buflen = 0;
+	char *buf = NULL;
+	size_t len;
+
+char *myname = argv[1];
+
+	if( mkfifo(myname, 0666) < 0 ){
+		perror( "Cannot create a pipe\n" );
+	}
+mypipe = fopen( myname, "r" );
+
+		while ( len = getline(&buf, &buflen, mypipe ) > 0 ) {
+	    		printf( "Received: %s", buf );
+			int exit = ! strcmp(buf, "FINE\n");
+	    		if( exit ) {	//compare buf con "FINE"
+				printf("fine!\n");
+				unlink(myname);
+				return 0;
+			}
+		}
+
+		fclose(mypipe);
+
+
+GET TIME
+
+gettimeofday(&t1, NULL);
+
+
+
+ERRORS MESSAGE
+
+#define handle_error(msg) \
+           do { perror(msg); exit(EXIT_FAILURE); } while (0)
+
+
+PRINT
+
+printf("%s %s differ", file1Path, file2Path);    //%d

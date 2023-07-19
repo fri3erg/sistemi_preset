@@ -1,0 +1,39 @@
+int numberOfEvents = 0;
+  
+
+  int fd;
+  
+
+  int wd;
+
+  char buffer[EVENT_BUF_LEN];
+
+fd = inotify_init();
+
+if (fd < 0) perror("inotify_init");
+
+wd = inotify_add_watch(fd, dir, IN_CREATE | IN_MOVE) ;
+
+numberOfEvents = read(fd, buffer, EVENT_BUF_LEN);
+
+  if (numberOfEvents < 0) perror("read");
+
+while (i < numberOfEvents) {
+    struct inotify_event* event = (struct inotify_event*) &buffer[i];
+    if (event->mask & IN_CREATE | IN_MOVE) {			//(event->mask & IN_DELETE) 
+      if (!(event->mask & IN_ISDIR)) {
+
+char filePath[PATH_MAX];
+        strcpy(filePath, dir);
+        strcat(filePath, "/");
+        strcat(filePath, event->name);
+
+struct stat file;
+        stat(filePath, &file);
+
+        if ((S_IXUSR & file.st_mode)) {
+
+i += EVENT_SIZE + event->len; //for i < numberOfEvents
+
+inotify_rm_watch(fd, wd);
+  close(fd);

@@ -1,0 +1,113 @@
+ATOI
+
+int maxCommands= atoi(argv[1]);
+
+
+READ DIR
+
+char currentDir[PATH_MAX];
+DIR* dir;
+getcwd(currentDir, sizeof(currentDir));
+dir = opendir(currentDir);
+struct dirent *entry;
+if (dir == NULL){
+printf("Unable to read directory\n");
+exit(EXIT_FAILURE);
+}
+while ((entry=readdir(dir)) != NULL) {
+if (entry->d_type & DT_REG) {
+strcpy(filePath, currentDir);
+strcat(filePath, "/");
+strcat(filePath, entry->d_name);
+
+closedir(targetDir);
+
+
+if (entry->d_type & DT_DIR) {
+			char newDir[PATH_MAX];
+			strcpy(newDir, rootDir);
+			strcat(newDir, "/");
+			strcat(newDir, entry->d_name);
+if(!(strcmp(entry->d_name, "..")==0) && !(strcmp(entry->d_name, ".")==0)) {
+				dirCounter++;
+				recursivelyDirectoryExploration(newDir);
+			}
+} else if(entry->d_type & DT_REG) {}
+
+
+STAT
+
+struct stat fileStat;
+stat(filePath, &fileStat);
+
+if (S_ISLNK(file.st_mode)) {
+if(S_ISREG(file.st_mode)) {
+
+
+UNLINK & DELETE
+
+unlink(entryPath);
+
+
+REAL PATH
+
+char* realPath = realpath(dir, actualPath);
+
+
+FILE OPEN
+
+FILE* destFile = fopen(argv[2], "a");
+
+
+FFLUSH
+
+fflush(destFile);
+          int fd1 = fileno(destFile);
+
+
+TOKENS
+
+char* token = strtok(fileName, " ");
+        char* command = token;
+        int k = 0;
+        while (token != NULL && k < spaces) {
+          argumentList[k] = token;
+          token = strtok(NULL, " ");
+          k++;
+        }
+
+
+
+CHANGE OUTPUT 
+
+int fdOut = open(filePath, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+          dup2(fdOut, 1);
+          close(fdOut);
+
+
+
+FPUT FGET
+
+FILE* srcFile = fopen(targetFile, "r");
+              FILE* destFile = fopen(newFilePath, "a");
+              char c;
+              while ((c = fgetc(srcFile)) != EOF) {
+                fputc(c, destFile);
+              }
+              fclose(destFile);
+              fclose(srcFile);
+
+
+
+CREAT
+
+FILE *fp;
+fp  = fopen ("D://data.txt", "w");
+
+close(creat(filePath, 0666));
+
+
+EXIT
+
+exit(EXIT_FAILURE);
+exit(EXIT_SUCCESS);

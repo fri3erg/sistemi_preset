@@ -1,0 +1,69 @@
+FORK
+
+switch (pid = fork()) {
+    case -1:
+      exit(1);
+      break;
+    case 0:
+      printf("Esecuzione comando da processo figlio con pid:%d \n", getpid());
+      break;
+    default:
+      if (waitpid(pid, &wstatus, 0) == -1)
+        exit(1);
+      ret_val = WEXITSTATUS(wstatus);
+      break;
+    }
+
+//(WIFSIGNALED(wstatus))
+if (WIFEXITED(status)) {
+if (WEXITSTATUS(status) == 0) {
+printf("%s %s differ\n", file1Path, file2Path);
+for (int k=i; k < numberOfProcess; k++){
+kill(processes[k], SIGTERM);
+}
+
+
+
+
+fatherPid = fork();
+  // Nel caso in cui siamo nel processo appena creato
+  if (fatherPid == 0) {
+    printf("Entered in father process with pid %d\n", getpid()); 
+
+
+
+SIGNAL
+
+sigset_t mask;
+	int sfd;
+	struct signalfd_siginfo fdsi;
+	ssize_t s;
+	pid_t mainProc = getpid();
+
+	sigemptyset(&mask);
+	sigaddset(&mask, SIGUSR1);
+	sigaddset(&mask, SIGUSR2);
+
+if (sigprocmask(SIG_BLOCK, &mask, NULL) == -1)
+			handle_error("sigprocmask");
+
+sfd = signalfd(-1, &mask, 0);
+		if (sfd == -1)
+			handle_error("signalfd");
+
+for (;;) {
+			s = read(sfd, &fdsi, sizeof(fdsi));
+			if (s != sizeof(fdsi))
+				handle_error("read");
+			if (fdsi.ssi_signo == SIGUSR1) {
+				sig1counter++;
+				printf("SIG 1: %d\n", sig1counter);
+			} else if (fdsi.ssi_signo == SIGUSR2) {
+				sig2counter++;
+				printf("SIG 2: %d\n", sig2counter);	
+			} else {
+				printf("Read unexpected signal\n");
+			}
+		}
+
+kill(mainProc, SIGUSR1);

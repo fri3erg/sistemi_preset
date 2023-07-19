@@ -1,0 +1,31 @@
+HARDLINK
+
+os.remove(element)
+      name, ext = os.path.splitext(element)
+      name+= "(link)"
+      name+=ext
+      os.link(file, name)
+
+
+
+
+EXECUTE
+
+os.system(f"ex -n '+norm!gg=G' +wq {path}")
+
+
+SUBPROCESS RUN
+
+while True:
+
+input = sys.stdin.readline()
+
+subprocess.run(commands, shell=False)
+returnValue.check_returncode()
+
+result = subprocess.run(["dir"], shell=True, capture_output=True, text=True)
+
+print(result.stdout)
+
+sys.exit(0)
+

@@ -1,0 +1,80 @@
+OPTIONAL GETCWD
+
+dir = ''
+  if len(sys.argv) > 1:
+    dir = sys.argv[1]
+  else:
+    dir = os.getcwd()
+
+
+OS.WALK
+
+  pathname = {}
+  for dirPath, dirName, files in os.walk(dir):
+    dirEntries = os.scandir(dirPath)
+    for entry in dirEntries:
+      pathname.setdefault(entry.inode(), [])
+      pathname[entry.inode()].append(os.path.join(dirPath, entry.name))
+  
+  for inode in pathname.keys():
+    print(f'{pathname[inode]}\n')
+  
+
+
+
+if entry.is_dir() or entry.is_file():
+
+
+READLINE
+
+firstLine = file.readline()
+  if "#!" in firstLine:
+
+
+OPEN FILE
+
+file = open(fileName, "r")
+text = file.read()
+  textList = text.split('\n')
+
+
+IS FILE
+
+for file in files:
+    if os.path.isfile(os.path.join(dir, file)):
+
+
+GET TIME
+
+lastModTime = os.path.getmtime(os.path.join(dirPath, file))
+
+
+
+SORT
+
+sorted(dictionary.keys(), key=lambda x: x.lower())
+
+sort = sorted(subTree.keys())
+subTree[sort[-1]]
+
+
+ACCESS
+
+if os.access(dir + element + "/fd/", os.R_OK):
+
+COPY:
+filesToCpy = []
+	keys = filesToMerge.keys()
+	for key in keys:
+		#print(filesToMerge[key])
+		filesToCpy.append(filesToMerge[key])
+	
+	print(f'files: {filesToCpy}\n')
+	for f in filesToCpy:
+		shutil.copy(f, destDir)
+		os.remove(f)
+
+
+
+
+
